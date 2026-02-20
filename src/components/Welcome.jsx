@@ -8,20 +8,21 @@ const FONT_WEIGHTS = {
 }
 
 const renderText = (text, className, baseWeight = 400) => {
-    return [...text].map((char, i) => (
-        <span key={i} className={className} style={{
-            fontVariationSettings: `'wght' ${baseWeight }`,
+    const safeText = String(text ?? '');
+    return [...safeText].map((char, i) => (
+        <span key={`${i}-${char}`} className={className} style={{
+            fontVariationSettings: `'wght' ${baseWeight}`,
         }}>
-            {char === " " ? '\u00A0' : char}
+            {char === ' ' ? '\u00A0' : char}
         </span>
     ));
-
-}
-const setupTextHover = (container, type)=>{
-    if(!container) return;
+};
+const setupTextHover = (container, type) => {
+    if (!container) return undefined;
 
     const letters = container.querySelectorAll('span');
-    const {min, max, default: baseWeight} = FONT_WEIGHTS[type];
+    const config = FONT_WEIGHTS[type] ?? FONT_WEIGHTS.title;
+    const { min, max, default: baseWeight } = config;
 
     const animateLetter = (letter, weight, duration = 0.25) =>{
         return gsap.to(letter, {duration, ease: 'power2.out', fontVariationSettings: `'wght' ${weight}`});
@@ -58,14 +59,14 @@ const Welcome = () => {
     const titleRef = useRef(null);
     const subtitleRef = useRef(null);
 
-    useGSAP(()=>{
+    useGSAP(() => {
         const titleCleanup = setupTextHover(titleRef.current, 'title');
         const subtitleCleanup = setupTextHover(subtitleRef.current, 'subtitle');
-        return ()=>{
-            titleCleanup();
-            subtitleCleanup();
-        }
-    },[]);
+        return () => {
+            titleCleanup?.();
+            subtitleCleanup?.();
+        };
+    }, []);
 
   return (
     <section id='welcome'>
@@ -77,7 +78,7 @@ const Welcome = () => {
         </h1>
 
         <div className="small-screen">
-            <p>This Portfolio is designed for desktop/tabled screens only.</p>
+            <p>This Portfolio is designed for desktop/tablet screens only.</p>
         </div>
     </section>
   )
