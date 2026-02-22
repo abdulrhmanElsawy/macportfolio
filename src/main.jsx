@@ -4,7 +4,9 @@ import './index.css'
 import App from './App.jsx'
 
 const base = import.meta.env.BASE_URL || '/'
-document.documentElement.style.setProperty('--bg-image', `url("${base}images/wallpaper.png")`)
+const wallpaperPath = `${base.replace(/\/?$/, '/')}images/wallpaper.png`
+const wallpaperUrl = new URL(wallpaperPath, window.location.href).href
+document.documentElement.style.setProperty('--bg-image', `url("${wallpaperUrl}")`)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
