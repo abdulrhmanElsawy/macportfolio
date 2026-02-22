@@ -1,6 +1,7 @@
 import windowWrapper from '#hoc/windowWrapper';
 import { WindowControls } from '#components';
 import { DownloadIcon } from 'lucide-react';
+import { assetUrl } from '#utils/assetUrl';
 
 import {pdfjs} from 'react-pdf';
 import { Document, Page } from 'react-pdf';
@@ -22,12 +23,12 @@ const resume = () => {
         <WindowControls target="resume" />
         <h2>resume.pdf</h2>
 
-        <a href="files/resume.pdf" download className="cursor-pointer" >
+        <a href={assetUrl('files/resume.pdf')} download className="cursor-pointer" >
             <DownloadIcon className="icon" />
         </a>
       </div>
 
-      <Document file="files/resume.pdf">
+      <Document file={assetUrl('files/resume.pdf')}>
         <Page pageNumber={1} renderTextLayer renderAnnotationLayer/>
       </Document>
 

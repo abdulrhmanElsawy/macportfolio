@@ -1,6 +1,7 @@
 import { WindowControls } from '#components';
 import windowWrapper from '#hoc/windowWrapper';
 import useWindowStore from '#store/window';
+import { assetUrl } from '#utils/assetUrl';
 
 const Image = () => {
   const { windows } = useWindowStore();
@@ -20,7 +21,7 @@ const Image = () => {
       <div className="preview">
         {imageUrl && (
           <img
-            src={imageUrl}
+            src={assetUrl(imageUrl)}
             alt={name ?? ''}
           />
         )}

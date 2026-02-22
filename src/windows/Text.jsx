@@ -1,6 +1,7 @@
 import { WindowControls } from '#components';
 import windowWrapper from '#hoc/windowWrapper';
 import useWindowStore from '#store/window';
+import { assetUrl } from '#utils/assetUrl';
 
 const Text = () => {
   const { windows } = useWindowStore();
@@ -21,7 +22,7 @@ const Text = () => {
       <div className="p-4 overflow-auto flex flex-col gap-3">
         {image && (
           <img
-            src={image}
+            src={assetUrl(image)}
             alt={name ?? ''}
             className="w-full max-h-48 object-contain rounded bg-gray-100"
           />

@@ -5,9 +5,10 @@ import {resolve, dirname} from 'path';
 import { fileURLToPath } from 'url';
 
 // https://vite.dev/config/
+// Use relative base so assets work on GitHub Pages (e.g. https://user.github.io/repo-name/)
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '',
+  base: './',
   resolve: {
     alias: {
       '#components': resolve(dirname(fileURLToPath(import.meta.url)), 'src/components'),
@@ -16,6 +17,7 @@ export default defineConfig({
       '#hoc': resolve(dirname(fileURLToPath(import.meta.url)), 'src/hoc'),
       '#windows': resolve(dirname(fileURLToPath(import.meta.url)), 'src/windows'),
       '#hooks': resolve(dirname(fileURLToPath(import.meta.url)), 'src/hooks'),
+      '#utils': resolve(dirname(fileURLToPath(import.meta.url)), 'src/utils'),
     },
   },
 })

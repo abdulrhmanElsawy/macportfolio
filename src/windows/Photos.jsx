@@ -3,15 +3,17 @@ import { WindowControls } from '#components';
 import windowWrapper from '#hoc/windowWrapper';
 import useWindowStore from '#store/window';
 import { photosLinks, gallery } from '#constants';
+import { assetUrl } from '#utils/assetUrl';
 
 const Photos = () => {
   const { openWindow } = useWindowStore();
   const [activeTabId, setActiveTabId] = useState(1);
 
   const openImage = (item) => {
+    const url = item.img ?? item.imageUrl;
     openWindow('imgfile', {
       name: item.name ?? `Image ${item.id}`,
-      imageUrl: item.img ?? item.imageUrl,
+      imageUrl: url ? assetUrl(url) : undefined,
     });
   };
 
@@ -39,7 +41,7 @@ const Photos = () => {
                   }
                 }}
               >
-                <img src={link.icon} alt="" />
+                <img src={assetUrl(link.icon)} alt="" />
                 <p>{link.title}</p>
               </li>
             ))}
@@ -61,7 +63,7 @@ const Photos = () => {
                   }
                 }}
               >
-                <img src={item.img} alt={item.name ?? `Gallery image ${item.id}`} />
+                <img src={assetUrl(item.img)} alt={item.name ?? `Gallery image ${item.id}`} />
               </li>
             ))}
           </ul>

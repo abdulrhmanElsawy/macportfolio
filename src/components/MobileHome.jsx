@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { dockApps } from '#constants';
 import useWindowStore from '#store/window';
+import { assetUrl } from '#utils/assetUrl';
 
 export default function MobileHome() {
   const { openWindow } = useWindowStore();
@@ -53,7 +54,7 @@ export default function MobileHome() {
               onClick={() => handleOpen(app)}
               aria-label={app.name}
             >
-              <img src={`/images/${app.icon}`} alt="" />
+              <img src={assetUrl(`/images/${app.icon}`)} alt="" />
               <span>{app.name}</span>
             </button>
           ))}

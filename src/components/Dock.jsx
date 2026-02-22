@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { dockApps } from "#constants";
 import useWindowStore from "#store/window";
+import { assetUrl } from '#utils/assetUrl';
 
 const Dock = () => {
   const { openWindow, closeWindow, focusWindow, windows } = useWindowStore();
@@ -94,7 +95,7 @@ const Dock = () => {
               onClick={() => toggleApp({ id, canOpen })}
             >
               <img
-                src={`/images/${icon}`}
+                src={assetUrl(`/images/${icon}`)}
                 alt={name}
                 loading="lazy"
                 className={canOpen ? "" : "opacity-60"}

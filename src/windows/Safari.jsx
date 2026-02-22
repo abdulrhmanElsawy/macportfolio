@@ -3,6 +3,7 @@ import { WindowControls } from "#components";
 import { PanelLeft, ChevronLeft, ChevronRight, ShieldHalf, SearchIcon, Share, Plus, Copy, MoveRight } from "lucide-react";
 import windowWrapper from "#hoc/windowWrapper";
 import { blogPosts } from "#constants";
+import { assetUrl } from '#utils/assetUrl';
 
 const Safari = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -64,7 +65,7 @@ const Safari = () => {
               filteredPosts.map(({ id, image, title, link, date }) => (
                 <div key={id} className="blog-post">
                   <div className="col-span-2">
-                    <img src={image} alt={title} />
+                    <img src={assetUrl(image)} alt={title} />
                   </div>
 
                   <div className="content">

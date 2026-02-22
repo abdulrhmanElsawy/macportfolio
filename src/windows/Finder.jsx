@@ -4,6 +4,7 @@ import windowWrapper from "#hoc/windowWrapper";
 import useLocationStore from "#store/location";
 import { locations } from "#constants";
 import useWindowStore from "#store/window";
+import { assetUrl } from '#utils/assetUrl';
 const Finder = () => {
 
   const { activeLocation, setActiveLocation } = useLocationStore();
@@ -26,7 +27,7 @@ const Finder = () => {
             key={item.id}
             onClick={() => setActiveLocation(item)}
           >
-            <img src={item.icon} alt={item.name} className="w-4" />
+            <img src={assetUrl(item.icon)} alt={item.name} className="w-4" />
             <p className="text-sm font-medium truncate">{item.name}</p>
           </li>
         ))}
@@ -54,7 +55,7 @@ const Finder = () => {
               className={item.position}
               onClick={() => openItem(item)}
             >
-              <img src={item.icon} alt={item.name} />
+              <img src={assetUrl(item.icon)} alt={item.name} />
               <p>{item.name}</p>
             </li>
           ))}

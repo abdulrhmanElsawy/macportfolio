@@ -2,6 +2,7 @@ import { WindowControls } from '#components';
 import windowWrapper from '#hoc/windowWrapper';
 import useWindowStore from '#store/window';
 import { locations } from '#constants';
+import { assetUrl } from '#utils/assetUrl';
 
 const Archive = () => {
   const { openWindow } = useWindowStore();
@@ -10,7 +11,7 @@ const Archive = () => {
   const openItem = (item) => {
     if (item.fileType === 'pdf') return openWindow('resume');
     if (item.fileType === 'img') {
-      openWindow('imgfile', { name: item.name, imageUrl: item.imageUrl });
+      openWindow('imgfile', { name: item.name, imageUrl: item.imageUrl ? assetUrl(item.imageUrl) : undefined });
       return;
     }
     if (['fig', 'url'].includes(item.fileType) && item.href) {
@@ -43,7 +44,7 @@ const Archive = () => {
                   }
                 }}
               >
-                <img src={item.icon} alt={item.name} />
+                <img src={assetUrl(item.icon)} alt={item.name} />
                 <p>{item.name}</p>
               </li>
             ))}

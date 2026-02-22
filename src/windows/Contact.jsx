@@ -1,6 +1,8 @@
 import { WindowControls } from "#components";
 import windowWrapper from "#hoc/windowWrapper";
 import { socials } from "#constants";
+import { assetUrl } from '#utils/assetUrl';
+
 const Contact = () => {
   return (
     <>
@@ -10,7 +12,7 @@ const Contact = () => {
       </div>
       
       <div className="p-5 space-y-5">
-        <img src="/images/elsawy.jpg" alt="Abdelrhman Elsawy" className="w-20 rounded-full" />
+        <img src={assetUrl('/images/elsawy.jpg')} alt="Abdelrhman Elsawy" className="w-20 rounded-full" />
         <h3>Abdelrhman Elsawy</h3>
         <p> Got an idea? Let's talk! </p>
         
@@ -19,7 +21,7 @@ const Contact = () => {
           {socials.map(({id, text, icon, bg, link}) => (
             <li key={id} style={{backgroundColor: bg}}>
               <a href={link} target="_blank" rel="noopener noreferrer">
-                <img src={icon} alt={text} className="size-5" />
+                <img src={assetUrl(icon)} alt={text} className="size-5" />
                 <p>{text}</p>
               </a>
             </li>

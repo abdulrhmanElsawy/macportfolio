@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { navLinks, navIcons } from '#constants';
 import useWindowStore from '#store/window';
 import useThemeStore from '#store/theme';
+import { assetUrl } from '#utils/assetUrl';
 
 const NAV_ICON_ACTIONS = {
   1: { window: 'safari', label: 'Open Safari (Articles)' },
@@ -27,7 +28,7 @@ const Navbar = () => {
   return (
     <nav>
       <div>
-        <img src="/images/logo.svg" alt="logo" />
+        <img src={assetUrl('/images/logo.svg')} alt="logo" />
         <p className="font-bold text-xl"> ELSawy MAC OS </p>
 
         <ul>
@@ -52,7 +53,7 @@ const Navbar = () => {
                   className="icon-hover p-0 border-0 bg-transparent cursor-pointer"
                   aria-label={label}
                 >
-                  <img src={img} alt={label} />
+                  <img src={assetUrl(img)} alt={label} />
                 </button>
               </li>
             );

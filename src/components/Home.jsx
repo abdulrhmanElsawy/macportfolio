@@ -1,4 +1,5 @@
 import { locations } from "#constants";
+import { assetUrl } from '#utils/assetUrl';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
@@ -26,7 +27,7 @@ const Home = () => {
       <ul>
         {projects.map((project) => (
           <li onClick={() => handleOpenProjectFinder(project)} key={project.id} className="group folder">
-            <img src="/images/folder.png" alt={project.name} />
+            <img src={assetUrl('/images/folder.png')} alt={project.name} />
             <p>{project.name}</p>
           </li>
         ))}
