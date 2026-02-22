@@ -19,6 +19,17 @@ body {
   --breakpoint-3xl: 1920px;
 }
 
+@keyframes terminal-output-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @utility flex-center {
   @apply flex items-center justify-center;
 }
@@ -67,7 +78,7 @@ body {
   }
 
   #welcome {
-    @apply text-gray-200 flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
+    @apply z-50 text-gray-200 flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
 
     .small-screen {
       @apply sm:hidden m-7 bg-red-300/20 backdrop-blur-lg p-3 rounded-md absolute top-10;
@@ -101,8 +112,12 @@ body {
   #window-controls {
     @apply flex gap-2;
 
+    button {
+      @apply border-0 p-0 cursor-pointer;
+    }
+
     .close {
-      @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer;
+      @apply size-3.5 rounded-full bg-[#ff6157];
     }
 
     .minimize {
@@ -119,14 +134,42 @@ body {
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col h-[85vh];
+
+    .safari-header {
+      @apply flex-shrink-0;
+    }
 
     .search {
-      @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
+      @apply flex items-center gap-3 min-w-0 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
 
       input {
-        @apply placeholder:text-gray-400;
+        @apply placeholder:text-gray-400 outline-none border-0 bg-transparent min-w-0 flex-1;
       }
+    }
+
+    .safari-scroll {
+      @apply flex-1 min-h-0 overflow-y-auto overflow-x-hidden;
+      scrollbar-width: thin;
+      scrollbar-color: theme(colors.gray.400) theme(colors.gray.100);
+      height: 100vh;
+    }
+
+    .safari-scroll::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .safari-scroll::-webkit-scrollbar-track {
+      background: theme(colors.gray.100);
+    }
+
+    .safari-scroll::-webkit-scrollbar-thumb {
+      background: theme(colors.gray.400);
+      border-radius: 5px;
+    }
+
+    .safari-scroll::-webkit-scrollbar-thumb:hover {
+      background: theme(colors.gray.500);
     }
 
     .blog {
@@ -171,6 +214,26 @@ body {
 
     .techstack {
       @apply text-sm font-roboto p-5;
+
+      .terminal-command {
+        @apply min-h-[1.5em];
+      }
+
+      .terminal-cursor {
+        @apply inline-block transition-opacity duration-75;
+
+        &.cursor-visible {
+          @apply opacity-100;
+        }
+
+        &.cursor-hidden {
+          @apply opacity-0;
+        }
+      }
+
+      .terminal-output {
+        animation: terminal-output-in 0.35s ease-out;
+      }
 
       .label {
         @apply flex items-center ms-10 mt-7;
@@ -250,7 +313,7 @@ body {
         li {
           @apply flex space-y-1 items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors;
 
-          &:first-child {
+          &.active {
             @apply bg-blue-100 text-blue-700;
           }
 
@@ -306,11 +369,19 @@ body {
     }
   }
 
+  section.maximized {
+    @apply fixed inset-0 w-full h-full max-w-full max-h-full rounded-xl;
+  }
+
   #finder {
-    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
+    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl flex flex-col max-h-[85vh];
+
+    &.maximized {
+      @apply w-[90vw] h-[85vh] left-[5vw] top-[5vh];
+    }
 
     .sidebar {
-      @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
+      @apply w-48 flex-shrink-0 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3 min-h-0 overflow-y-auto;
 
       h3 {
         @apply text-xs font-medium text-gray-400 mb-1;
@@ -376,12 +447,46 @@ body {
     }
   }
 
+  #trash {
+    @apply w-xl absolute top-48 left-1/3 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+
+    h2 {
+      @apply font-bold text-sm text-center w-full;
+    }
+
+    .archive-content {
+      @apply p-6 min-h-[200px];
+
+      .empty-message {
+        @apply text-sm text-gray-500 text-center py-8;
+      }
+
+      ul {
+        @apply grid grid-cols-2 gap-4;
+
+        li {
+          @apply flex flex-col items-center gap-2 p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100;
+
+          img {
+            @apply size-16 object-contain;
+          }
+
+          p {
+            @apply text-sm font-medium text-center text-gray-800 truncate max-w-full;
+          }
+        }
+      }
+    }
+  }
+
   #home {
     @apply relative z-0 max-sm:hidden;
 
     ul {
+      @apply flex flex-col flex-wrap content-start gap-4 p-6 h-dvh max-h-dvh;
+
       li {
-        @apply absolute z-0 select-none flex items-center flex-col;
+        @apply relative z-0 select-none flex items-center flex-col cursor-pointer w-fit flex-shrink-0;
 
         img {
           @apply group-hover:bg-gray-950/10 p-1 rounded-md;
@@ -391,6 +496,229 @@ body {
           @apply text-sm text-white text-center px-1 rounded-md group-hover:bg-blue-500 transition-colors max-w-40;
         }
       }
+    }
+  }
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  nav {
+    @apply bg-gray-900/70 text-gray-100;
+
+    ul p {
+      @apply text-gray-200;
+    }
+
+    time {
+      @apply text-gray-200;
+    }
+  }
+
+  .icon:hover {
+    @apply bg-gray-600;
+  }
+
+  #welcome {
+    @apply text-gray-300;
+
+    .small-screen p {
+      @apply text-gray-500;
+    }
+  }
+
+  #dock .dock-container {
+    @apply bg-gray-900/40;
+  }
+
+  #dock .tooltip {
+    @apply !bg-gray-700 !text-gray-200;
+  }
+
+  #window-header {
+    @apply bg-gray-800 border-gray-700 text-gray-300;
+  }
+
+  #finder .sidebar {
+    @apply bg-gray-800 border-gray-700;
+
+    h3 {
+      @apply text-gray-400;
+    }
+
+    .active {
+      @apply bg-blue-900/50 text-blue-200;
+    }
+
+    .not-active {
+      @apply text-gray-300 hover:bg-gray-700;
+    }
+  }
+
+  #finder .content {
+    @apply bg-gray-800;
+
+    p {
+      @apply text-gray-200;
+    }
+  }
+
+  #safari {
+    @apply bg-gray-900;
+
+    .search {
+      @apply bg-gray-800 border-gray-600;
+
+      input {
+        @apply text-gray-200 placeholder:text-gray-500;
+      }
+    }
+
+    .safari-scroll {
+      @apply overflow-y-auto;
+      scrollbar-width: thin;
+      scrollbar-color: theme(colors.gray.600) theme(colors.gray.800);
+    }
+
+    .safari-scroll::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .safari-scroll::-webkit-scrollbar-track {
+      background: theme(colors.gray.800);
+    }
+
+    .safari-scroll::-webkit-scrollbar-thumb {
+      background: theme(colors.gray.600);
+      border-radius: 5px;
+    }
+
+    .safari-scroll::-webkit-scrollbar-thumb:hover {
+      background: theme(colors.gray.500);
+    }
+
+    .blog .text-gray-500 {
+      @apply text-gray-400;
+    }
+
+    .blog {
+      @apply bg-gray-800;
+
+      h2 {
+        @apply text-pink-400;
+      }
+
+      .content h3 {
+        @apply text-gray-200;
+      }
+
+      .content p {
+        @apply text-gray-400;
+      }
+
+      .content a {
+        @apply text-blue-400;
+      }
+    }
+  }
+
+  #terminal {
+    @apply bg-gray-900;
+
+    .techstack {
+      @apply text-gray-200;
+    }
+
+    .techstack .label p {
+      @apply text-gray-300;
+    }
+
+    .techstack .content li h3,
+    .techstack .content li .check {
+      @apply text-green-400;
+    }
+
+    .techstack .content li ul {
+      @apply text-gray-200;
+    }
+
+    .techstack .content span.text-gray-500 {
+      @apply text-gray-400;
+    }
+
+    .footnote {
+      @apply text-gray-400;
+    }
+
+    .footnote p {
+      @apply text-gray-300;
+    }
+
+    .footnote svg {
+      fill: currentColor;
+    }
+  }
+
+  #resume {
+    @apply bg-gray-900;
+  }
+
+  #txtfile,
+  #imgfile,
+  #photos,
+  #contact,
+  #trash {
+    @apply bg-gray-900;
+  }
+
+  #trash .archive-content {
+    .empty-message {
+      @apply text-gray-400;
+    }
+
+    ul li {
+      @apply hover:bg-gray-800;
+
+      p {
+        @apply text-gray-200;
+      }
+    }
+  }
+
+  #txtfile .p-4 p,
+  #txtfile .p-4 [class*="text-gray"] {
+    @apply !text-gray-200;
+  }
+
+  #txtfile .p-4 p.font-semibold {
+    @apply !text-gray-300;
+  }
+
+  #imgfile #window-header p {
+    @apply !text-gray-200;
+  }
+
+  #imgfile .preview {
+    @apply bg-gray-800;
+  }
+
+  #contact h3,
+  #contact .p-5 > p {
+    @apply text-gray-200;
+  }
+
+  #photos .sidebar {
+    @apply bg-gray-800 border-gray-700;
+
+    h2 {
+      @apply text-gray-500;
+    }
+
+    li.active {
+      @apply bg-blue-900/50 text-blue-200;
+    }
+
+    li p {
+      @apply text-gray-200;
     }
   }
 }

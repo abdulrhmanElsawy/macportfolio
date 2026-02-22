@@ -6,10 +6,13 @@ import gsap from 'gsap';
 
 import { Draggable } from 'gsap/Draggable';
 
+const FALLBACK_Z = 1000;
+
 const windowWrapper = (Component, windowKey) => {
   const Wrapped = (props) => {
-    const { focusWindow, windows} = useWindowStore();
-    const {isOpen, zIndex} = windows[windowKey];
+    const focusWindow = useWindowStore((s) => s.focusWindow);
+    const win = useWindowStore((s) => s.windows[windowKey]);
+    const { isOpen, zIndex, isMaximized } = win ?? {};
     const ref = useRef(null);
 
     useGSAP(() => {
@@ -22,7 +25,7 @@ const windowWrapper = (Component, windowKey) => {
 
     useGSAP(() => {
       const el = ref.current;
-      if (!window || !isOpen) return;
+      if (!el || !isOpen) return;
 
       el.style.display = 'block';
 
@@ -37,9 +40,13 @@ const windowWrapper = (Component, windowKey) => {
         el.style.display =isOpen ? 'block' : 'none';
     }, [isOpen]);
 
-    return <section id={windowKey} ref={ref} style={{zIndex}} className={`absolute'}`}>
+    const sectionClass = `absolute ${isMaximized ? 'maximized' : ''}`.trim();
+    const z = typeof zIndex === 'number' ? zIndex : FALLBACK_Z;
+    return (
+      <section id={windowKey} ref={ref} style={{ zIndex: z }} className={sectionClass}>
         <Component {...props} />
-    </section>
+      </section>
+    );
   };
 
   Wrapped.displayName = `WindowWrapper(${Component.displayName || Component.name || 'Component'})`;

@@ -1,11 +1,26 @@
+import { useState, useMemo } from "react";
 import { WindowControls } from "#components";
-import { PanelLeft, ChevronLeft, ChevronRight, ShieldHalf, SearchIcon, Share, Plus, Copy, MoveRight, ExternalLink } from "lucide-react";
+import { PanelLeft, ChevronLeft, ChevronRight, ShieldHalf, SearchIcon, Share, Plus, Copy, MoveRight } from "lucide-react";
 import windowWrapper from "#hoc/windowWrapper";
 import { blogPosts } from "#constants";
+
 const Safari = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredPosts = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return blogPosts;
+    return blogPosts.filter(
+      (post) =>
+        post.title?.toLowerCase().includes(q) ||
+        post.date?.toLowerCase().includes(q) ||
+        post.link?.toLowerCase().includes(q)
+    );
+  }, [searchQuery]);
+
   return (
     <>
-      <div id="window-header">
+      <div id="window-header" className="safari-header">
         <WindowControls target="safari" />
 
         <PanelLeft className="ml-10 icon" />
@@ -15,45 +30,55 @@ const Safari = () => {
           <ChevronRight className="icon" />
         </div>
 
-        <div className="flex-1 flex-center gap-3">
-          <ShieldHalf className="icon" />
+        <div className="flex-1 flex-center gap-3 min-w-0">
+          <ShieldHalf className="icon shrink-0" />
 
-          <div className="search">
-            <SearchIcon className="icon" />
+          <div className="search" onMouseDown={(e) => e.stopPropagation()}>
+            <SearchIcon className="icon shrink-0" aria-hidden />
             <input
               type="text"
-              placeholder="Search or enter website name"
-              className="flex-1"
+              placeholder="Search articles..."
+              className="flex-1 min-w-0"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search articles"
+              autoComplete="off"
             />
           </div>
         </div>
-        <div className="flex items-center gap-5">
-            <Share className="icon" />
-            <Plus className="icon" />
-            <Copy className="icon" />
+        <div className="flex items-center gap-5 shrink-0">
+          <Share className="icon" />
+          <Plus className="icon" />
+          <Copy className="icon" />
         </div>
       </div>
 
-      <div className="blog">
-        <h2>Latest Articles</h2>
+      <div className="safari-scroll">
+        <div className="blog">
+          <h2>Latest Articles</h2>
 
-        <div className="space-y-8">
-            {blogPosts.map(({id,image,title,link,date})=>(
+          <div className="space-y-8">
+            {filteredPosts.length === 0 ? (
+              <p className="text-gray-500 text-sm">No articles match your search.</p>
+            ) : (
+              filteredPosts.map(({ id, image, title, link, date }) => (
                 <div key={id} className="blog-post">
-                    <div className="col-span-2">
-                        <img src={image} alt={title} />
-                    </div>
+                  <div className="col-span-2">
+                    <img src={image} alt={title} />
+                  </div>
 
-                    <div className="content">
-                        <p>{date}</p>
-                        <h3>{title}</h3>
-                        <a href={link} target="_blank" rel="noopener noreferrer"> Check out the full post <MoveRight className="icon-hover" /> </a>
-                    </div>
+                  <div className="content">
+                    <p>{date}</p>
+                    <h3>{title}</h3>
+                    <a href={link} target="_blank" rel="noopener noreferrer">
+                      Check out the full post <MoveRight className="icon-hover" />
+                    </a>
+                  </div>
                 </div>
-            ))}
+              ))
+            )}
+          </div>
         </div>
-
-
       </div>
     </>
   );

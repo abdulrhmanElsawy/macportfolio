@@ -1,3 +1,5 @@
+import { workProjectsForFinder } from '../data/elsawyWork.js';
+
 const navLinks = [
     {
       id: 1,
@@ -70,32 +72,123 @@ const navLinks = [
       id: "trash",
       name: "Archive", // was "Trash"
       icon: "trash.png",
-      canOpen: false,
+      canOpen: true,
     },
   ];
   
   const blogPosts = [
     {
       id: 1,
-      date: "Sep 2, 2025",
+      date: "Oct 2, 2025",
       title:
-        "TypeScript Explained: What It Is, Why It Matters, and How to Master It",
-      image: "/images/blog1.png",
-      link: "https://jsmastery.com/blog/typescript-explained-what-it-is-why-it-matters-and-how-to-master-it",
+        "A premium dessert and drinks destination offering a variety of cakes, waffles, crepes, coffee, and matcha.",
+      image: "/images/1.webp",
+      link: "https://bros-ksa.com/",
     },
     {
       id: 2,
       date: "Aug 28, 2025",
-      title: "The Ultimate Guide to Mastering Three.js for 3D Development",
-      image: "/images/blog2.png",
-      link: "https://jsmastery.com/blog/the-ultimate-guide-to-mastering-three-js-for-3d-development",
+      title: "The official website of the Sharjah Police Headquarters, providing digital services for traffic, security, and community inquiries.",
+      image: "/images/2.webp",
+      link: "https://www.shjpolice.gov.ae/",
     },
     {
       id: 3,
-      date: "Aug 15, 2025",
-      title: "The Ultimate Guide to Mastering GSAP Animations",
-      image: "/images/blog3.png",
-      link: "https://jsmastery.com/blog/the-ultimate-guide-to-mastering-gsap-animations",
+              date: "Sep 15, 2025",
+      title: "A Saudi company specializing in information technology and business solutions, offering digital transformation, infrastructure, and data management services.",
+      image: "/images/3.webp",
+      link: "https://almohtawa.com.sa/",
+    },
+    {
+      id: 4,
+      date: "Oct 15, 2025",
+      title: "A construction and contracting company specializing in building construction, roads, bridges, infrastructure projects, and equipment rental.",
+      image: "/images/4.webp",
+      link: "https://acpca.net/",
+    },
+    {
+      id: 5,
+      date: "Nov 15, 2025",
+      title: "A luxury car rental service based in Riyadh, offering premium vehicles for business, special events, and airport transfers.",
+      image: "/images/5.webp",
+      link: "https://newtrendsa.com/",
+    },
+    {
+      id: 6,
+      date: "Dec 15, 2025",
+      title: "A media production and digital assets agency offering services like video production, animation, event documentation, and auditory identity design.",
+      image: "/images/6.webp",
+      link: "https://proeffect.sa/",
+    },
+    {
+      id: 7,
+      date: "Jan 15, 2026",
+      title: "A comprehensive pet care platform in Egypt connecting pet owners with vets, shops, adoption services, and lost & found assistance.",
+      image: "/images/7.webp",
+      link: "https://egypet.site/",
+    },
+    {
+      id: 8,
+      date: "Feb 15, 2026",
+      title: "A building maintenance company in the UAE providing plumbing, electrical, HVAC, and general repair services.",
+      image: "/images/8.webp",
+      link: "https://magicfixer.net/",
+    },
+    {
+      id: 9,
+      date: "Mar 15, 2026",
+      title: "A leading trading company in the UAE supplying electrical, plumbing, hardware, and power tool products.",
+      image: "/images/9.webp",
+      link: "https://magicdxb.com/",
+    },
+    {
+      id: 10,
+      date: "Mar 15, 2026",
+      title: "A Jeddah-based marketing agency providing branding, advertising, social media management, and event activation services.",
+      image: "/images/10.webp",
+      link: "https://aurora-ksa.com/",
+    },
+    {
+      id: 11,
+      date: "Mar 15, 2026",
+      title: "A service provider assisting healthcare professionals with medical licensing, certification, and employment processes in the UAE and GCC.",
+      image: "/images/11.webp",
+      link: "https://www.iridiuminfinte.com/",
+    },
+    {
+      id: 12,
+      date: "Mar 15, 2026",
+      title: "A technical consultancy firm specializing in financial services analytics, data management, and OFSAA administration.",
+      image: "/images/12.webp",
+      link: "https://ofsaera.com/",
+    },
+    {
+      id: 13,
+      date: "Mar 15, 2026",
+      title: "A creative agency offering artistic production, digital marketing, TV/film production, and health sector marketing strategies.",
+      image: "/images/13.webp",
+      link: "https://www.bluray-media.com/",
+    },
+    {
+      id: 14,
+      date: "Mar 15, 2026",
+      title: "A premium automotive care center specializing in car wrapping, paint protection films (PPF), and detailing services.",
+      image: "/images/14.webp",
+      link: "https://sunmaxauto.ae/",
+    },
+    {
+      id: 15,
+      date: "Mar 15, 2026",
+      title: "A subsidiary of Nesma Batterjee specializing in manufacturing high-quality construction chemicals like adhesives and waterproofing.",
+      image: "/images/15.webp",
+      link: "https://www.meister-me.com/",
+    },
+    {
+      id: 16,
+      date: "Mar 15, 2026",
+      title: "A construction chemicals manufacturer specializing in adhesives and waterproofing.",
+      image: "/images/16.webp",
+      link: "https://www.meister-me.com/",
     },
   ];
   
@@ -129,31 +222,31 @@ const navLinks = [
   const socials = [
     {
       id: 1,
-      text: "Github",
+      text: "GitHub",
       icon: "/icons/github.svg",
-      bg: "#f4656b",
-      link: "https://github.com/JavaScript-Mastery-Pro",
+      bg: "#24292e",
+      link: "https://github.com/abdulrhmanElsawy",
     },
     {
       id: 2,
-      text: "Platform",
-      icon: "/icons/atom.svg",
-      bg: "#4bcb63",
-      link: "https://jsmastery.com/",
+      text: "Facebook",
+      icon: "/icons/twitter.svg",
+      bg: "#1877f2",
+      link: "https://www.facebook.com/profile.php?id=100006455849752",
     },
     {
       id: 3,
-      text: "Twitter/X",
-      icon: "/icons/twitter.svg",
-      bg: "#ff866b",
-      link: "https://x.com/jsmasterypro",
-    },
-    {
-      id: 4,
       text: "LinkedIn",
       icon: "/icons/linkedin.svg",
       bg: "#05b6f6",
-      link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
+      link: "https://www.linkedin.com/in/abdelrhman-elsawy-365632204/",
+    },
+    {
+      id: 4,
+      text: "Khamsat",
+      icon: "/icons/atom.svg",
+      bg: "#4bcb63",
+      link: "https://khamsat.com/user/abdulrhmanelsawy/reviews",
     },
   ];
   
@@ -188,20 +281,68 @@ const navLinks = [
   const gallery = [
     {
       id: 1,
-      img: "/images/gal1.png",
+      img: "/images/1.webp",
     },
     {
       id: 2,
-      img: "/images/gal2.png",
+      img: "/images/2.webp",
     },
     {
       id: 3,
-      img: "/images/gal3.png",
+      img: "/images/3.webp",
     },
     {
       id: 4,
-      img: "/images/gal4.png",
+      img: "/images/4.webp",
     },
+    {
+      id: 5,
+          img: "/images/5.webp",
+    },
+    {
+      id: 6,
+      img: "/images/6.webp",
+    },
+    {
+      id: 7,
+      img: "/images/7.webp",
+    },
+    {
+      id: 8,
+      img: "/images/8.webp",
+    },
+    {
+      id: 9,
+      img: "/images/9.webp",
+    },
+    {
+      id: 10,
+      img: "/images/10.webp",
+    },
+    {
+      id: 11,
+      img: "/images/11.webp",
+    },
+    {
+      id: 12,
+      img: "/images/12.webp",
+    },
+    {
+      id: 13,
+      img: "/images/13.webp",
+    },
+    {
+      id: 14,
+      img: "/images/14.webp",
+    },
+    {
+      id: 15,
+      img: "/images/15.webp",
+    },
+    {
+      id: 16,
+      img: "/images/16.webp",
+    }
   ];
   
   export {
@@ -221,168 +362,9 @@ const navLinks = [
     name: "Work",
     icon: "/icons/work.svg",
     kind: "folder",
-    children: [
-      // ▶ Project 1
-      {
-        id: 5,
-        name: "Nike Ecommerce Website Application",
-        icon: "/images/folder.png",
-        kind: "folder",
-        position: "top-10 left-5", // icon position inside Finder
-        windowPosition: "top-[5vh] left-5", // optional: Finder window position
-        children: [
-          {
-            id: 1,
-            name: "Nike Project.txt",
-            icon: "/images/txt.png",
-            kind: "file",
-            fileType: "txt",
-            position: "top-5 left-10",
-            description: [
-              "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
-              "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
-              "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
-              "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
-            ],
-          },
-          {
-            id: 2,
-            name: "nike.com",
-            icon: "/images/safari.png",
-            kind: "file",
-            fileType: "url",
-            href: "https://youtu.be/fZdTYswuZjU?si=Awjl-pIst9e09_UU",
-            position: "top-10 right-20",
-          },
-          {
-            id: 4,
-            name: "nike.png",
-            icon: "/images/image.png",
-            kind: "file",
-            fileType: "img",
-            position: "top-52 right-80",
-            imageUrl: "/images/project-1.png",
-          },
-          {
-            id: 5,
-            name: "Design.fig",
-            icon: "/images/plain.png",
-            kind: "file",
-            fileType: "fig",
-            href: "https://google.com",
-            position: "top-60 right-20",
-          },
-        ],
-      },
-  
-      // ▶ Project 2
-      {
-        id: 6,
-        name: "AI Resume Analyzer",
-        icon: "/images/folder.png",
-        kind: "folder",
-        position: "top-52 right-80",
-        windowPosition: "top-[20vh] left-7",
-        children: [
-          {
-            id: 1,
-            name: "AI Resume Analyzer Project.txt",
-            icon: "/images/txt.png",
-            kind: "file",
-            fileType: "txt",
-            position: "top-5 right-10",
-            description: [
-              "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-              "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-              "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-              "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
-            ],
-          },
-          {
-            id: 2,
-            name: "ai-resume-analyzer.com",
-            icon: "/images/safari.png",
-            kind: "file",
-            fileType: "url",
-            href: "https://youtu.be/iYOz165wGkQ?si=R1hs8Legl200m0Cl",
-            position: "top-20 left-20",
-          },
-          {
-            id: 4,
-            name: "ai-resume-analyzer.png",
-            icon: "/images/image.png",
-            kind: "file",
-            fileType: "img",
-            position: "top-52 left-80",
-            imageUrl: "/images/project-2.png",
-          },
-          {
-            id: 5,
-            name: "Design.fig",
-            icon: "/images/plain.png",
-            kind: "file",
-            fileType: "fig",
-            href: "https://google.com",
-            position: "top-60 left-5",
-          },
-        ],
-      },
-  
-      // ▶ Project 3
-      {
-        id: 7,
-        name: "Food Delivery App",
-        icon: "/images/folder.png",
-        kind: "folder",
-        position: "top-10 left-80",
-        windowPosition: "top-[33vh] left-7",
-        children: [
-          {
-            id: 1,
-            name: "Food Delivery App Project.txt",
-            icon: "/images/txt.png",
-            kind: "file",
-            fileType: "txt",
-            position: "top-5 left-10",
-            description: [
-              "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-              "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-              "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-              "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
-            ],
-          },
-          {
-            id: 2,
-            name: "food-delivery-app.com",
-            icon: "/images/safari.png",
-            kind: "file",
-            fileType: "url",
-            href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
-            position: "top-10 right-20",
-          },
-          {
-            id: 4,
-            name: "food-delivery-app.png",
-            icon: "/images/image.png",
-            kind: "file",
-            fileType: "img",
-            position: "top-52 right-80",
-            imageUrl: "/images/project-3.png",
-          },
-          {
-            id: 5,
-            name: "Design.fig",
-            icon: "/images/plain.png",
-            kind: "file",
-            fileType: "fig",
-            href: "https://google.com",
-            position: "top-60 right-20",
-          },
-        ],
-      },
-    ],
+    children: workProjectsForFinder,
   };
-  
+
   const ABOUT_LOCATION = {
     id: 2,
     type: "about",
@@ -397,7 +379,7 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-10 left-5",
-        imageUrl: "/images/adrian.jpg",
+        imageUrl: "/images/elsawy.jpg",
       },
       {
         id: 2,
@@ -406,7 +388,7 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-28 right-72",
-        imageUrl: "/images/adrian-2.jpg",
+        imageUrl: "/images/elsawy-2.jpg",
       },
       {
         id: 3,
@@ -415,7 +397,7 @@ const navLinks = [
         kind: "file",
         fileType: "img",
         position: "top-52 left-80",
-        imageUrl: "/images/adrian-3.jpeg",
+        imageUrl: "/images/elsawy-3.jpg",
       },
       {
         id: 4,
@@ -425,17 +407,17 @@ const navLinks = [
         fileType: "txt",
         position: "top-60 left-5",
         subtitle: "Meet the Developer Behind the Code",
-        image: "/images/adrian.jpg",
+        image: "/images/elsawy.jpg",
         description: [
-          "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
-          "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
-          "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-          "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
+          "Hey! I'm Abdelrhman Elsawy, a web developer who builds high-performance websites and exceptional user experiences.",
+          "I work with React, Next.js, Node.js, and TypeScript—focusing on clean UI, smooth UX, and maintainable code.",
+          "I've delivered projects for clients across KSA, UAE, and Egypt—from e-commerce and dashboards to marketing and government sites.",
+          "Freelance developer on Khamsat. Let's turn your idea into a solid product.",
         ],
       },
     ],
   };
-  
+
   const RESUME_LOCATION = {
     id: 3,
     type: "resume",
@@ -449,12 +431,10 @@ const navLinks = [
         icon: "/images/pdf.png",
         kind: "file",
         fileType: "pdf",
-        // you can add `href` if you want to open a hosted resume
-        // href: "/your/resume/path.pdf",
       },
     ],
   };
-  
+
   const TRASH_LOCATION = {
     id: 4,
     type: "trash",
@@ -464,43 +444,44 @@ const navLinks = [
     children: [
       {
         id: 1,
-        name: "trash1.png",
+        name: "trash1.webp",
         icon: "/images/image.png",
         kind: "file",
         fileType: "img",
         position: "top-10 left-10",
-        imageUrl: "/images/trash-1.png",
+        imageUrl: "/images/trash-1.webp",
       },
       {
         id: 2,
-        name: "trash2.png",
+        name: "trash2.webp",
         icon: "/images/image.png",
         kind: "file",
         fileType: "img",
         position: "top-40 left-80",
-        imageUrl: "/images/trash-2.png",
+        imageUrl: "/images/trash-2.webp",
       },
     ],
   };
-  
+
   export const locations = {
     work: WORK_LOCATION,
     about: ABOUT_LOCATION,
     resume: RESUME_LOCATION,
     trash: TRASH_LOCATION,
   };
-  
+
   const INITIAL_Z_INDEX = 1000;
-  
+
   const WINDOW_CONFIG = {
-    finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-    imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+    finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    trash: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
+    imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null, isMaximized: false },
   };
-  
+
   export { INITIAL_Z_INDEX, WINDOW_CONFIG };
