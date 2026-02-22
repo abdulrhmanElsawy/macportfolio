@@ -3,25 +3,27 @@ import { useRef } from "react";
 import { useGSAP } from '@gsap/react';
 import { useLayoutEffect } from "react";
 import gsap from 'gsap';
-
 import { Draggable } from 'gsap/Draggable';
+import useIsMobile from '#hooks/useIsMobile';
 
 const FALLBACK_Z = 1000;
 
 const windowWrapper = (Component, windowKey) => {
   const Wrapped = (props) => {
+    const isMobile = useIsMobile();
     const focusWindow = useWindowStore((s) => s.focusWindow);
     const win = useWindowStore((s) => s.windows[windowKey]);
     const { isOpen, zIndex, isMaximized } = win ?? {};
     const ref = useRef(null);
 
     useGSAP(() => {
+      if (isMobile) return;
       const el = ref.current;
       if (!el) return;
 
-      const[instance] = Draggable.create(el, {onPress: () => focusWindow(windowKey)});
+      const [instance] = Draggable.create(el, { onPress: () => focusWindow(windowKey) });
       return () => instance.kill();
-    }, []);
+    }, [isMobile]);
 
     useGSAP(() => {
       const el = ref.current;
@@ -40,7 +42,11 @@ const windowWrapper = (Component, windowKey) => {
         el.style.display =isOpen ? 'block' : 'none';
     }, [isOpen]);
 
-    const sectionClass = `absolute ${isMaximized ? 'maximized' : ''}`.trim();
+    const sectionClass = [
+      'absolute',
+      isMaximized ? 'maximized' : '',
+      isMobile ? 'mobile-sheet' : '',
+    ].filter(Boolean).join(' ');
     const z = typeof zIndex === 'number' ? zIndex : FALLBACK_Z;
     return (
       <section id={windowKey} ref={ref} style={{ zIndex: z }} className={sectionClass}>
