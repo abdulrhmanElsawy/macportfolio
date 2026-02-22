@@ -375,12 +375,26 @@ body {
   }
 
   #resume {
-    @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-fit max-w-full absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col max-h-[85vh];
 
     #window-header {
       h2 {
         @apply font-bold text-sm text-center flex-1;
       }
+    }
+
+    .resume-document {
+      overflow-y: scroll;
+      height: 100vh;
+      @apply overflow-y-auto overflow-x-hidden flex flex-col items-center gap-4 p-4 min-h-0;
+    }
+
+    .resume-document .react-pdf__Page {
+      @apply shadow-sm;
+    }
+
+    .resume-document canvas {
+      @apply max-w-full h-auto;
     }
   }
 
@@ -389,10 +403,14 @@ body {
   }
 
   #finder {
-    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl flex flex-col max-h-[85vh];
+    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl flex flex-col h-[85vh] max-h-[85vh];
 
     &.maximized {
       @apply w-[90vw] h-[85vh] left-[5vw] top-[5vh];
+    }
+
+    & > div.bg-white {
+      @apply flex-1 min-h-0 overflow-auto;
     }
 
     .sidebar {
@@ -420,18 +438,22 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 bg-white max-w-2xl relative;
+      @apply flex-1 p-8 bg-white min-h-0 overflow-y-auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1.5rem 1rem;
+      align-content: start;
+    }
 
-      li {
-        @apply absolute flex items-center flex-col gap-3;
+    .content li {
+      @apply flex flex-col items-center gap-2 cursor-pointer p-2 rounded-lg transition-colors hover:bg-gray-100;
 
-        img {
-          @apply object-contain object-center size-16 relative group-hover:scale-105;
-        }
+      img {
+        @apply object-contain object-center size-16 group-hover:scale-105;
+      }
 
-        p {
-          @apply text-sm text-center font-medium w-40;
-        }
+      p {
+        @apply text-sm text-center font-medium w-24 truncate;
       }
     }
   }
@@ -524,6 +546,10 @@ body {
       @apply text-gray-200;
     }
 
+    img {
+      @apply invert;
+    } 
+
     time {
       @apply text-gray-200;
     }
@@ -571,6 +597,10 @@ body {
 
   #finder .content {
     @apply bg-gray-800;
+
+    li:hover {
+      @apply bg-gray-700;
+    }
 
     p {
       @apply text-gray-200;
